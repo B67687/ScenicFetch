@@ -12,19 +12,19 @@ public static class ProviderCatalog
                 "Bing",
                 "Recent Bing homepage wallpapers as images.",
                 MediaKind.Image,
-                isUndocumented: false),
+                IsUndocumented: false),
             new SourceDescriptor(
                 SourceId.Spotlight,
                 "Spotlight",
                 "Windows Spotlight imagery from Microsoft's undocumented content feed.",
                 MediaKind.Image,
-                isUndocumented: true),
+                IsUndocumented: true),
             new SourceDescriptor(
                 SourceId.AppleAerial,
                 "Apple Aerial",
                 "Apple aerial video catalogs parsed from Apple-hosted manifest archives.",
                 MediaKind.Video,
-                isUndocumented: true),
+                IsUndocumented: true),
         };
 
     public static IReadOnlyDictionary<SourceId, IFeedProvider> CreateDefaultProviders(HttpClient httpClient) =>

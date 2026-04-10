@@ -46,21 +46,27 @@ public sealed class BingProvider(HttpClient httpClient) : IFeedProvider
         return response.Images.Select(
             image =>
             {
+                if (string.IsNullOrWhiteSpace(image.UrlBase))
+                {
+                    throw new InvalidOperationException("Bing response did not include a urlbase value.");
+                }
+
+                var urlBase = image.UrlBase;
                 var title = string.IsNullOrWhiteSpace(image.Title) ? image.Copyright ?? "Bing image" : image.Title;
                 var variants = SupportedResolutions
-                    .Select(item => new VariantInfo(item, BuildImageUrl(image.UrlBase, item)))
+                    .Select(item => new VariantInfo(item, BuildImageUrl(urlBase, item)))
                     .ToArray();
 
                 return new FetchItem
                 {
-                    Id = image.StartDate ?? image.UrlBase ?? Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture),
+                    Id = image.StartDate ?? urlBase,
                     Source = SourceId.Bing,
                     Kind = MediaKind.Image,
                     Title = title,
                     Author = image.Copyright,
                     PageUrl = BuildPageUrl(image.Quiz),
-                    PrimaryUrl = BuildImageUrl(image.UrlBase, resolution),
-                    PreviewUrl = BuildImageUrl(image.UrlBase, PreviewResolution),
+                    PrimaryUrl = BuildImageUrl(urlBase, resolution),
+                    PreviewUrl = BuildImageUrl(urlBase, PreviewResolution),
                     Variants = variants,
                     Tags = ["bing", "homepage"],
                     CapturedAt = ParseDate(image.StartDate),
