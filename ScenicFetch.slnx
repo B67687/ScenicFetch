@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ScenicFetch.Cli/ScenicFetch.Cli.csproj" />
+    <Project Path="src/ScenicFetch.Core/ScenicFetch.Core.csproj" />
+    <Project Path="src/ScenicFetch.Providers/ScenicFetch.Providers.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ScenicFetch.Tests/ScenicFetch.Tests.csproj" />
+  </Folder>
+</Solution>

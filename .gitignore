@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+.artifacts/
+.scratch/
+.dotnet-home/
+*.user
+*.suo
+TestResults/
+testfile.txt
