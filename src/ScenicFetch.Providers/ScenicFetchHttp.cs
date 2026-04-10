@@ -29,10 +29,13 @@ public static class ScenicFetchHttp
 
     private static bool ValidateCertificate(
         HttpRequestMessage requestMessage,
-        X509Certificate2? _,
-        X509Chain? _,
+        X509Certificate2? certificate,
+        X509Chain? chain,
         SslPolicyErrors sslPolicyErrors)
     {
+        _ = certificate;
+        _ = chain;
+
         if (sslPolicyErrors == SslPolicyErrors.None)
         {
             return true;
