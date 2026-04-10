@@ -85,12 +85,13 @@ public sealed class BingProvider(HttpClient httpClient) : IFeedProvider
             return null;
         }
 
-        if (Uri.TryCreate(quiz, UriKind.Absolute, out var absoluteUri))
+        if (Uri.TryCreate(quiz, UriKind.Absolute, out var absoluteUri)
+            && (absoluteUri.Scheme == Uri.UriSchemeHttp || absoluteUri.Scheme == Uri.UriSchemeHttps))
         {
             return absoluteUri.ToString();
         }
 
-        return $"{BaseUrl}{quiz}";
+        return $"{BaseUrl}/{quiz.TrimStart('/')}";
     }
 
     private static DateTimeOffset? ParseDate(string? startDate)

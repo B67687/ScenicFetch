@@ -7,8 +7,9 @@ namespace ScenicFetch.Providers;
 
 public static class ScenicFetchHttp
 {
-    private const string UserAgent =
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ScenicFetch/1.0 (+https://github.com/B67687/ScenicFetch)";
+    private const string ProductName = "ScenicFetch";
+    private const string ProductVersion = "1.0";
+    private const string ProductComment = "(+https://github.com/B67687/ScenicFetch)";
 
     public static HttpClient CreateDefaultClient()
     {
@@ -22,7 +23,8 @@ public static class ScenicFetchHttp
         {
             Timeout = TimeSpan.FromSeconds(45),
         };
-        client.DefaultRequestHeaders.UserAgent.Add(ProductInfoHeaderValue.Parse(UserAgent));
+        client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(ProductName, ProductVersion));
+        client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(ProductComment));
         client.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/plain, */*");
         return client;
     }
